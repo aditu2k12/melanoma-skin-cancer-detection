@@ -40,17 +40,20 @@ The step by step break down of the final CNN architecture :
 
 4. **Pooling Layers**: After each convolutional layer, a max-pooling layer (`MaxPooling2D`) is added to downsample the feature maps, reducing their spatial dimensions while retaining the most important information. Max-pooling helps in reducing computational complexity and controlling overfitting.
 
-5. **Dropout Layer**: A dropout layer (`Dropout`) with a dropout rate of 0.1 is added after the last Dense layer before classification layer. Dropout is a regularization technique used to prevent overfitting by randomly dropping a fraction of the neurons during training.
+5. **L2 Regularizarion**: L2 regularization is used in each convolution layer with regularization rate = 0.001 to control 
+overfitting
 
-6. **Flatten Layer**: The `Flatten` layer is added to flatten the 2D feature maps into a 1D vector, preparing the data for input into the fully connected layers.
+6. **Dropout Layer**: A dropout layer (`Dropout`) with a dropout rate of 0.1 is added after the last Dense layer before classification layer. Dropout is a regularization technique used to prevent overfitting by randomly dropping a fraction of the neurons during training.
 
-7. **Fully Connected Layers**: Two fully connected (dense) layers (`Dense`) are added with ReLU activation functions. The first dense layer consists of 128 neurons, and the second dense layer outputs the final classification probabilities for each class label.
+7. **Flatten Layer**: The `Flatten` layer is added to flatten the 2D feature maps into a 1D vector, preparing the data for input into the fully connected layers.
 
-8. **Output Layer**: The number of neurons in the output layer is determined by the `class_names` variable, representing the number of classes in the classification task. The output layer does not have an activation function specified, as it is followed by the loss function during training.
+8. **Fully Connected Layers**: Two fully connected (dense) layers (`Dense`) are added with ReLU activation functions. The first dense layer consists of 128 neurons, and the second dense layer outputs the final classification probabilities for each class label.
 
-9. **Model Compilation**: The model is compiled using the Adam optimizer (`optimizer='adam'`) with learning rate = 0.001 and the Sparse Categorical Crossentropy loss function (`loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True)`), which is suitable for multi-class classification problems. Additionally, accuracy is chosen as the evaluation metric (`metrics=['accuracy']`).
+9. **Output Layer**: The number of neurons in the output layer is determined by the `class_names` variable, representing the number of classes in the classification task. The output layer does not have an activation function specified, as it is followed by the loss function during training.
 
-10. **Training**: The model is trained using the `fit` method with the specified number of epochs (`epochs=30`). The `ModelCheckpoint` and `EarlyStopping` callbacks are employed to monitor the validation accuracy during training. The `ModelCheckpoint` callback saves the model with the best validation accuracy, while the `EarlyStopping` callback stops training if the validation accuracy does not improve for a specified number of epochs (patience=5 in this case). These callbacks help prevent overfitting and ensure that the model converges to the best possible solution.
+10. **Model Compilation**: The model is compiled using the Adam optimizer (`optimizer='adam'`) with learning rate = 0.001 and the Sparse Categorical Crossentropy loss function (`loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True)`), which is suitable for multi-class classification problems. Additionally, accuracy is chosen as the evaluation metric (`metrics=['accuracy']`).
+
+11. **Training**: The model is trained using the `fit` method with the specified number of epochs (`epochs=30`). The `ModelCheckpoint` and `EarlyStopping` callbacks are employed to monitor the validation accuracy during training. The `ModelCheckpoint` callback saves the model with the best validation accuracy, while the `EarlyStopping` callback stops training if the validation accuracy does not improve for a specified number of epochs (patience=5 in this case). These callbacks help prevent overfitting and ensure that the model converges to the best possible solution.
 
 ## Conclusions
 
